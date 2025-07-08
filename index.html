@@ -5,12 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>日本15天行程規劃</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
-            margin: 0;
-            padding: 20px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            padding: 20px;
             line-height: 1.6;
         }
 
@@ -30,70 +35,6 @@
             font-size: 2.8em;
             font-weight: 700;
             letter-spacing: 2px;
-        }
-
-        .route-overview {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-
-        .city-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 25px;
-            border-radius: 18px;
-            text-align: center;
-            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .city-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-        }
-
-        .city-card h3 {
-            margin: 0 0 15px 0;
-            font-size: 1.6em;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-align: center;
-        }
-
-        .city-card p {
-            margin: 8px 0;
-            opacity: 0.95;
-            font-size: 1em;
-            font-weight: 400;
-            text-align: left;
-        }
-
-        .city-card p:first-of-type {
-            text-align: center;
-        }
-
-        .city-card .accommodation-label {
-            color: #FFD700;
-            font-weight: 600;
-        }
-
-        .city-card .highlights-label {
-            color: #98FB98;
-            font-weight: 600;
-        }
-
-        .city-card .accommodation-text {
-            color: #FFD700;
-        }
-
-        .city-card .accommodation-text .hotel-link {
-            color: #FFD700;
-        }
-
-        .city-card .accommodation-text .hotel-link:hover {
-            color: #FFA500;
         }
 
         .route-stats {
@@ -127,6 +68,66 @@
             color: #7f8c8d;
             font-size: 1em;
             font-weight: 500;
+        }
+
+        .route-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .city-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 18px;
+            text-align: center;
+            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .city-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .city-card h3 {
+            margin: 0 0 15px 0;
+            font-size: 1.6em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        .city-card p {
+            margin: 8px 0;
+            opacity: 0.95;
+            font-size: 1em;
+            font-weight: 400;
+            text-align: center;
+        }
+
+        .city-card .accommodation-label,
+        .city-card .highlights-label {
+            font-weight: 600;
+        }
+
+        .city-card .accommodation-label {
+            color: #FFD700;
+        }
+
+        .city-card .highlights-label {
+            color: #98FB98;
+        }
+
+        .city-card .hotel-link {
+            color: #FFD700;
+            text-decoration: none;
+        }
+
+        .city-card .hotel-link:hover {
+            color: #FFA500;
         }
 
         .map-container {
@@ -280,34 +281,51 @@
             font-weight: 600;
         }
 
-        .attraction-items {
+        .attraction-card .attraction-items {
             font-size: 0.95em;
             line-height: 1.7;
         }
 
-        .attraction-link, .activity-link, .hotel-link {
+        .attraction-card .food-section {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #f0f0f0;
+        }
+
+        .attraction-card .food-label {
+            color: #e74c3c;
+            font-weight: 600;
+            font-size: 0.9em;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .attraction-card .food-items {
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+
+        .attraction-card .attraction-link {
             color: inherit;
             text-decoration: none;
             font-weight: 500;
             transition: all 0.2s ease;
-            cursor: pointer;
         }
 
-        .attraction-link:hover, .activity-link:hover {
+        .attraction-card .attraction-link:hover {
             color: #667eea;
         }
 
-        .hotel-link:hover {
+        .attraction-card .food-link {
             color: #e74c3c;
-        }
-
-        .city-card .attraction-link, .city-card .activity-link, .city-card .hotel-link {
-            color: white;
             text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
         }
 
-        .city-card .attraction-link:hover, .city-card .activity-link:hover, .city-card .hotel-link:hover {
-            opacity: 0.8;
+        .attraction-card .food-link:hover {
+            color: #c0392b;
+            text-decoration: underline;
         }
 
         .usage-note {
@@ -402,6 +420,65 @@
             border-left: 4px solid #667eea;
             padding-left: 15px;
             font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .day-food {
+            color: #e74c3c;
+            font-size: 0.95em;
+            border-left: 4px solid #e74c3c;
+            padding-left: 15px;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .day-route {
+            text-align: center;
+        }
+
+        .route-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 500;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .route-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+            background: linear-gradient(135deg, #764ba2, #667eea);
+        }
+
+        .activity-link,
+        .hotel-link,
+        .food-link {
+            color: inherit;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .activity-link:hover {
+            color: #667eea;
+        }
+
+        .hotel-link:hover {
+            color: #e74c3c;
+        }
+
+        .food-link {
+            color: #e74c3c;
+        }
+
+        .food-link:hover {
+            color: #c0392b;
+            text-decoration: underline;
         }
 
         .tips {
@@ -477,14 +554,6 @@
                 grid-template-columns: 1fr;
             }
             
-            .map-buttons {
-                grid-template-columns: 1fr;
-            }
-            
-            .attraction-grid {
-                grid-template-columns: 1fr;
-            }
-            
             .timeline {
                 padding-left: 25px;
             }
@@ -521,26 +590,26 @@
         <div class="route-overview">
             <div class="city-card">
                 <h3>🏯 名古屋</h3>
-                <p>停留：7天</p>
-                <p class="accommodation-text"><span class="accommodation-label">住宿：</span><a href="https://maps.google.com/maps?q=Comfort+Hotel+Nagoya+Meiekiminami" target="_blank" class="hotel-link">Comfort Hotel Nagoya Meiekiminami</a></p>
+                <p>停留：7天 (7/15-7/19, 7/28-7/29)</p>
+                <p><span class="accommodation-label">住宿：</span><a href="https://maps.google.com/maps?q=Comfort+Hotel+Nagoya+Meiekiminami" target="_blank" class="hotel-link">Comfort Hotel Nagoya Meiekiminami</a></p>
                 <p><span class="highlights-label">重點：</span>吉卜力公園、樂高樂園、名古屋城</p>
             </div>
             <div class="city-card">
                 <h3>🏔️ 高山</h3>
-                <p>停留：2天</p>
-                <p class="accommodation-text"><span class="accommodation-label">住宿：</span><a href="https://maps.google.com/maps?q=Chisun+Grand+Takayama" target="_blank" class="hotel-link">Chisun Grand Takayama</a></p>
+                <p>停留：2天 (7/20-7/21)</p>
+                <p><span class="accommodation-label">住宿：</span><a href="https://maps.google.com/maps?q=Chisun+Grand+Takayama" target="_blank" class="hotel-link">Chisun Grand Takayama</a></p>
                 <p><span class="highlights-label">重點：</span>高山老街、上高地</p>
             </div>
             <div class="city-card">
                 <h3>🦀 金澤</h3>
-                <p>停留：3天</p>
-                <p class="accommodation-text"><span class="accommodation-label">住宿：</span><a href="https://maps.google.com/maps?q=HOTEL+TORIFITO+KANAZAWA" target="_blank" class="hotel-link">HOTEL TORIFITO KANAZAWA</a></p>
-                <p><span class="highlights-label">重點：</span>白川合掌村、金澤兼六園</p>
+                <p>停留：3天 (7/22-7/24)</p>
+                <p><span class="accommodation-label">住宿：</span><a href="https://maps.google.com/maps?q=HOTEL+TORIFITO+KANAZAWA" target="_blank" class="hotel-link">HOTEL TORIFITO KANAZAWA</a></p>
+                <p><span class="highlights-label">重點：</span>白川合掌村、兼六園</p>
             </div>
             <div class="city-card">
                 <h3>🗻 富山</h3>
-                <p>停留：2天</p>
-                <p class="accommodation-text"><span class="accommodation-label">住宿：</span><a href="https://maps.google.com/maps?q=Onyado+Nono+Toyama" target="_blank" class="hotel-link">Onyado Nono</a> / <a href="https://maps.google.com/maps?q=Toyoko+Inn+Toyama" target="_blank" class="hotel-link">Toyoko Inn</a></p>
+                <p>停留：2天 (7/25-7/26)</p>
+                <p><span class="accommodation-label">住宿：</span><a href="https://maps.google.com/maps?q=Onyado+Nono+Toyama" target="_blank" class="hotel-link">Onyado Nono</a> / <a href="https://maps.google.com/maps?q=Toyoko+Inn+Toyama" target="_blank" class="hotel-link">Toyoko Inn</a></p>
                 <p><span class="highlights-label">重點：</span>立山黑部、松本城</p>
             </div>
         </div>
@@ -591,52 +660,96 @@
                     <div class="attraction-card nagoya">
                         <strong>🏯 名古屋 (7/15-7/19, 7/27-7/29)</strong>
                         <div class="attraction-items">
-                            • 吉卜力公園<br>
-                            • LEGOLAND Japan 名古屋<br>
-                            • 名古屋城<br>
-                            • 犬山城<br>
-                            • 名古屋港水族館<br>
-                            • 熱田神宮
+                            • <a href="https://maps.google.com/maps?q=吉卜力公園+愛知県" target="_blank" class="attraction-link">吉卜力公園</a><br>
+                            • <a href="https://maps.google.com/maps?q=LEGOLAND+Japan+名古屋" target="_blank" class="attraction-link">LEGOLAND Japan 名古屋</a><br>
+                            • <a href="https://maps.google.com/maps?q=名古屋城" target="_blank" class="attraction-link">名古屋城</a><br>
+                            • <a href="https://maps.google.com/maps?q=犬山城+愛知県" target="_blank" class="attraction-link">犬山城</a><br>
+                            • <a href="https://maps.google.com/maps?q=名古屋港水族館" target="_blank" class="attraction-link">名古屋港水族館</a><br>
+                            • <a href="https://maps.google.com/maps?q=熱田神宮+名古屋" target="_blank" class="attraction-link">熱田神宮</a>
+                        </div>
+                        <div class="food-section">
+                            <span class="food-label">🍱 必吃美食推薦：</span>
+                            <div class="food-items">
+                                • <a href="https://maps.google.com/maps?q=蓬萊軒本店+名古屋" target="_blank" class="food-link">蓬萊軒本店</a> (鰻魚飯三吃)<br>
+                                • <a href="https://maps.google.com/maps?q=味仙+今池本店+名古屋" target="_blank" class="food-link">味仙 今池本店</a> (台灣拉麵發源地)<br>
+                                • <a href="https://maps.google.com/maps?q=山本屋総本家+名古屋" target="_blank" class="food-link">山本屋総本家</a> (味噌烏龍麵)<br>
+                                • <a href="https://maps.google.com/maps?q=世界の山ちゃん+名古屋" target="_blank" class="food-link">世界的山將</a> (手羽先炸雞翅)<br>
+                                • <a href="https://maps.google.com/maps?q=コメダ珈琲店+名古屋" target="_blank" class="food-link">Komeda Coffee</a> (名古屋式早餐)<br>
+                                • <a href="https://maps.google.com/maps?q=柳橋中央市場+名古屋" target="_blank" class="food-link">柳橋中央市場</a> (新鮮海鮮)
+                            </div>
                         </div>
                     </div>
                     
                     <div class="attraction-card takayama">
                         <strong>🏔️ 高山 (7/20-7/21)</strong>
                         <div class="attraction-items">
-                            • 高山老街<br>
-                            • 宮川朝市<br>
-                            • 高山陣屋<br>
-                            • 上高地 河童橋<br>
-                            • 上高地 明神池
+                            • <a href="https://maps.google.com/maps?q=高山老街+岐阜県" target="_blank" class="attraction-link">高山老街</a><br>
+                            • <a href="https://maps.google.com/maps?q=宮川朝市+高山" target="_blank" class="attraction-link">宮川朝市</a><br>
+                            • <a href="https://maps.google.com/maps?q=高山陣屋+岐阜県" target="_blank" class="attraction-link">高山陣屋</a><br>
+                            • <a href="https://maps.google.com/maps?q=上高地+河童橋+長野県" target="_blank" class="attraction-link">上高地 河童橋</a><br>
+                            • <a href="https://maps.google.com/maps?q=上高地+明神池+長野県" target="_blank" class="attraction-link">上高地 明神池</a>
+                        </div>
+                        <div class="food-section">
+                            <span class="food-label">🥩 必吃美食推薦：</span>
+                            <div class="food-items">
+                                • <a href="https://maps.google.com/maps?q=飛騨牛+丸明+高山" target="_blank" class="food-link">丸明 飛騨牛專門店</a> (A5飛騨牛)<br>
+                                • <a href="https://maps.google.com/maps?q=中華そば+麺屋しらかわ+高山" target="_blank" class="food-link">麵屋白川</a> (高山拉麵)<br>
+                                • <a href="https://maps.google.com/maps?q=喫茶去+かつて+高山" target="_blank" class="food-link">喫茶去 快手</a> (飛騨牛串燒)<br>
+                                • <a href="https://maps.google.com/maps?q=舩坂酒造店+高山" target="_blank" class="food-link">舩坂酒造店</a> (日本酒試飲)<br>
+                                • <a href="https://maps.google.com/maps?q=二四三屋+高山" target="_blank" class="food-link">二四三屋</a> (飛騨牛包子)<br>
+                                • <a href="https://maps.google.com/maps?q=みたらし団子+高山" target="_blank" class="food-link">老街醬油糰子</a> (傳統甜點)
+                            </div>
                         </div>
                     </div>
                     
                     <div class="attraction-card kanazawa">
                         <strong>🌸 金澤 (7/22-7/24)</strong>
                         <div class="attraction-items">
-                            • 白川合掌村<br>
-                            • 兼六園 金澤<br>
-                            • 金澤城<br>
-                            • 東茶屋街<br>
-                            • 高岡大佛<br>
-                            • 哆啦A夢散步道
+                            • <a href="https://maps.google.com/maps?q=白川合掌村+岐阜県" target="_blank" class="attraction-link">白川合掌村</a><br>
+                            • <a href="https://maps.google.com/maps?q=兼六園+金沢市" target="_blank" class="attraction-link">兼六園 金澤</a><br>
+                            • <a href="https://maps.google.com/maps?q=金澤城+石川県" target="_blank" class="attraction-link">金澤城</a><br>
+                            • <a href="https://maps.google.com/maps?q=東茶屋街+金沢市" target="_blank" class="attraction-link">東茶屋街</a><br>
+                            • <a href="https://maps.google.com/maps?q=高岡大佛+富山県" target="_blank" class="attraction-link">高岡大佛</a><br>
+                            • <a href="https://maps.google.com/maps?q=哆啦A夢散步道+高岡" target="_blank" class="attraction-link">哆啦A夢散步道</a>
+                        </div>
+                        <div class="food-section">
+                            <span class="food-label">🦀 必吃美食推薦：</span>
+                            <div class="food-items">
+                                • <a href="https://maps.google.com/maps?q=近江町市場+金沢市" target="_blank" class="food-link">近江町市場</a> (新鮮海鮮丼)<br>
+                                • <a href="https://maps.google.com/maps?q=めおと寿司+金沢" target="_blank" class="food-link">夫婦壽司</a> (加能蟹、甜蝦)<br>
+                                • <a href="https://maps.google.com/maps?q=治部煮+金沢" target="_blank" class="food-link">治部煮專門店</a> (金澤鄉土料理)<br>
+                                • <a href="https://maps.google.com/maps?q=金箔ソフトクリーム+金沢" target="_blank" class="food-link">金箔霜淇淋</a> (東茶屋街)<br>
+                                • <a href="https://maps.google.com/maps?q=森八+金沢" target="_blank" class="food-link">森八本店</a> (和菓子老舖)<br>
+                                • <a href="https://maps.google.com/maps?q=ハントンライス+金沢" target="_blank" class="food-link">洋食 Grill Otsuka</a> (漢堡排蛋包飯)
+                            </div>
                         </div>
                     </div>
                     
                     <div class="attraction-card toyama">
                         <strong>🗻 富山 (7/25-7/27)</strong>
                         <div class="attraction-items">
-                            • 富山駅<br>
-                            • 松本城 長野<br>
-                            • 立山黑部阿爾卑斯路線<br>
-                            • 黑部大壩
+                            • <a href="https://maps.google.com/maps?q=富山駅" target="_blank" class="attraction-link">富山駅</a><br>
+                            • <a href="https://maps.google.com/maps?q=松本城+長野県" target="_blank" class="attraction-link">松本城 長野</a><br>
+                            • <a href="https://maps.google.com/maps?q=立山黑部+富山県" target="_blank" class="attraction-link">立山黑部阿爾卑斯路線</a><br>
+                            • <a href="https://maps.google.com/maps?q=黑部大壩+富山県" target="_blank" class="attraction-link">黑部大壩</a>
+                        </div>
+                        <div class="food-section">
+                            <span class="food-label">🍜 必吃美食推薦：</span>
+                            <div class="food-items">
+                                • <a href="https://maps.google.com/maps?q=白えび亭+富山駅" target="_blank" class="food-link">白蝦亭</a> (白蝦天婦羅丼)<br>
+                                • <a href="https://maps.google.com/maps?q=ますのすし本舗源+富山" target="_blank" class="food-link">鱒壽司本舖 源</a> (鱒魚壽司)<br>
+                                • <a href="https://maps.google.com/maps?q=富山ブラック+麺家いろは" target="_blank" class="food-link">麵家 彩葉</a> (富山黑拉麵)<br>
+                                • <a href="https://maps.google.com/maps?q=氷見うどん+富山" target="_blank" class="food-link">冰見烏龍麵</a> (手打烏龍麵)<br>
+                                • <a href="https://maps.google.com/maps?q=かまぼこ+河内屋+富山" target="_blank" class="food-link">河內屋</a> (昆布魚板)<br>
+                                • <a href="https://maps.google.com/maps?q=山田錦+清酒+富山" target="_blank" class="food-link">立山酒造</a> (富山地酒)
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             
             <p class="usage-note">
-                💡 <strong>使用說明</strong>：藍色連結為景點和交通站點，紅色連結為住宿飯店，點擊任何連結都會在Google Maps開啟對應位置，方便導航和路線規劃！
+                💡 <strong>使用說明</strong>：藍色連結為景點和交通站點，紅色連結為住宿飯店，<span style="color: #e74c3c; font-weight: 600;">紅色餐廳連結</span>為推薦美食店家，點擊任何連結都會在Google Maps開啟對應位置，方便導航和路線規劃！
             </p>
         </div>
 
@@ -650,6 +763,10 @@
                     ✈️ 抵達名古屋 → 買蛋糕、吃晚餐
                 </div>
                 <div class="day-hotel">🏨 <a href="https://maps.google.com/maps?q=Comfort+Hotel+Nagoya+Meiekiminami" target="_blank" class="hotel-link">Comfort Hotel Nagoya Meiekiminami</a></div>
+                <div class="day-food">🍽️ 推薦美食：<a href="https://maps.google.com/maps?q=コメダ珈琲店+名古屋" target="_blank" class="food-link">Komeda Coffee</a> (名古屋式早餐) 或 <a href="https://maps.google.com/maps?q=世界の山ちゃん+名古屋" target="_blank" class="food-link">世界的山將</a> (手羽先炸雞翅)</div>
+                <div class="day-route">
+                    <a href="https://www.google.com/maps/dir/中部國際機場/Comfort+Hotel+Nagoya+Meiekiminami" target="_blank" class="route-btn">🗺️ 查看今日路線</a>
+                </div>
             </div>
 
             <div class="day-item">
@@ -658,10 +775,14 @@
                     <div class="day-city">名古屋</div>
                 </div>
                 <div class="day-activities">
-                    🏰 <a href="https://maps.google.com/maps?q=吉卜力公園+愛知県" target="_blank" class="activity-link">吉卜力公園</a> <br>
+                    🏰 <a href="https://maps.google.com/maps?q=吉卜力公園+愛知県" target="_blank" class="activity-link">吉卜力公園</a>一日遊<br>
                     🚇 交通：地鐵東山線→<a href="https://maps.google.com/maps?q=藤丘駅+愛知県" target="_blank" class="activity-link">藤丘站</a>→Linimo→<a href="https://maps.google.com/maps?q=愛・地球博紀念公園駅" target="_blank" class="activity-link">愛・地球博紀念公園站</a>
                 </div>
                 <div class="day-hotel">🏨 <a href="https://maps.google.com/maps?q=Comfort+Hotel+Nagoya+Meiekiminami" target="_blank" class="hotel-link">Comfort Hotel Nagoya Meiekiminami</a></div>
+                <div class="day-food">🍽️ 推薦美食：<a href="https://maps.google.com/maps?q=コメダ珈琲店+名古屋" target="_blank" class="food-link">Komeda Coffee</a> (早餐) → 公園內餐廳 → <a href="https://maps.google.com/maps?q=味仙+今池本店+名古屋" target="_blank" class="food-link">味仙 今池本店</a> (台灣拉麵)</div>
+                <div class="day-route">
+                    <a href="https://www.google.com/maps/dir/Comfort+Hotel+Nagoya+Meiekiminami/吉卜力公園+愛知県/Comfort+Hotel+Nagoya+Meiekiminami" target="_blank" class="route-btn">🗺️ 查看今日路線</a>
+                </div>
             </div>
 
             <div class="day-item">
@@ -670,10 +791,14 @@
                     <div class="day-city">名古屋</div>
                 </div>
                 <div class="day-activities">
-                    🧱 <a href="https://maps.google.com/maps?q=LEGOLAND+Japan+名古屋" target="_blank" class="activity-link">日本樂高樂園 (LEGOLAND Japan)</a> <br>
+                    🧱 <a href="https://maps.google.com/maps?q=LEGOLAND+Japan+名古屋" target="_blank" class="activity-link">日本樂高樂園 (LEGOLAND Japan)</a><br>
                     🚇 交通：青波線→<a href="https://maps.google.com/maps?q=金城埠頭駅+名古屋" target="_blank" class="activity-link">金城埠頭站</a>→步行7分鐘
                 </div>
                 <div class="day-hotel">🏨 <a href="https://maps.google.com/maps?q=Comfort+Hotel+Nagoya+Meiekiminami" target="_blank" class="hotel-link">Comfort Hotel Nagoya Meiekiminami</a></div>
+                <div class="day-food">🍽️ 推薦美食：樂園內餐廳 → <a href="https://maps.google.com/maps?q=山本屋総本家+名古屋" target="_blank" class="food-link">山本屋総本家</a> (味噌烏龍麵) → <a href="https://maps.google.com/maps?q=柳橋中央市場+名古屋" target="_blank" class="food-link">柳橋中央市場</a> (新鮮海鮮)</div>
+                <div class="day-route">
+                    <a href="https://www.google.com/maps/dir/Comfort+Hotel+Nagoya+Meiekiminami/LEGOLAND+Japan+名古屋/Comfort+Hotel+Nagoya+Meiekiminami" target="_blank" class="route-btn">🗺️ 查看今日路線</a>
+                </div>
             </div>
 
             <div class="day-item">
@@ -682,9 +807,13 @@
                     <div class="day-city">名古屋</div>
                 </div>
                 <div class="day-activities">
-                    🍱 名古屋早餐 → 🏯 <a href="https://maps.google.com/maps?q=名古屋城" target="_blank" class="activity-link">名古屋城</a> → 🍜 <a href="https://maps.google.com/maps?q=金鯱横町+名古屋" target="_blank" class="activity-link">金鯱横町</a>午餐 → 🐟 <a href="https://maps.google.com/maps?q=名古屋港水族館" target="_blank" class="activity-link">名古屋水族館</a> & <a href="https://maps.google.com/maps?q=名古屋港" target="_blank" class="activity-link">名古屋港</a>
+                    🏯 <a href="https://maps.google.com/maps?q=名古屋城" target="_blank" class="activity-link">名古屋城</a> → 🍜 <a href="https://maps.google.com/maps?q=金鯱横町+名古屋" target="_blank" class="activity-link">金鯱横町</a>午餐 → 🐟 <a href="https://maps.google.com/maps?q=名古屋港水族館" target="_blank" class="activity-link">名古屋港水族館</a> & <a href="https://maps.google.com/maps?q=名古屋港" target="_blank" class="activity-link">名古屋港</a>
                 </div>
                 <div class="day-hotel">🏨 <a href="https://maps.google.com/maps?q=Comfort+Hotel+Nagoya+Meiekiminami" target="_blank" class="hotel-link">Comfort Hotel Nagoya Meiekiminami</a></div>
+                <div class="day-food">🍽️ 推薦美食：<a href="https://maps.google.com/maps?q=コメダ珈琲店+名古屋" target="_blank" class="food-link">Komeda Coffee</a> (早餐) → <a href="https://maps.google.com/maps?q=金鯱横町+名古屋" target="_blank" class="food-link">金鯱横町</a> (名古屋美食街) → 水族館內餐廳</div>
+                <div class="day-route">
+                    <a href="https://www.google.com/maps/dir/Comfort+Hotel+Nagoya+Meiekiminami/名古屋城/金鯱横町+名古屋/名古屋港水族館/Comfort+Hotel+Nagoya+Meiekiminami" target="_blank" class="route-btn">🗺️ 查看今日路線</a>
+                </div>
             </div>
 
             <div class="day-item">
@@ -696,6 +825,10 @@
                     🐟 <a href="https://maps.google.com/maps?q=柳橋中央市場+名古屋" target="_blank" class="activity-link">柳橋中央市場</a>早餐 → 🏰 <a href="https://maps.google.com/maps?q=犬山城+愛知県" target="_blank" class="activity-link">犬山城</a> & <a href="https://maps.google.com/maps?q=犬山城下町+愛知県" target="_blank" class="activity-link">犬山城下町</a> → 🏛️ <a href="https://maps.google.com/maps?q=明治村+愛知県" target="_blank" class="activity-link">明治村</a> → 🛍️ <a href="https://maps.google.com/maps?q=名古屋駅" target="_blank" class="activity-link">名古屋車站</a>購物
                 </div>
                 <div class="day-hotel">🏨 <a href="https://maps.google.com/maps?q=Comfort+Hotel+Nagoya+Meiekiminami" target="_blank" class="hotel-link">Comfort Hotel Nagoya Meiekiminami</a></div>
+                <div class="day-food">🍽️ 推薦美食：<a href="https://maps.google.com/maps?q=柳橋中央市場+名古屋" target="_blank" class="food-link">柳橋中央市場</a> (海鮮早餐) → 犬山城下町小吃 → <a href="https://maps.google.com/maps?q=世界の山ちゃん+名古屋" target="_blank" class="food-link">世界的山將</a> (手羽先)</div>
+                <div class="day-route">
+                    <a href="https://www.google.com/maps/dir/Comfort+Hotel+Nagoya+Meiekiminami/柳橋中央市場+名古屋/犬山城+愛知県/明治村+愛知県/名古屋駅/Comfort+Hotel+Nagoya+Meiekiminami" target="_blank" class="route-btn">🗺️ 查看今日路線</a>
+                </div>
             </div>
 
             <div class="day-item">
@@ -707,6 +840,10 @@
                     🚄 <a href="https://maps.google.com/maps?q=名古屋駅" target="_blank" class="activity-link">名古屋</a>→<a href="https://maps.google.com/maps?q=高山駅+岐阜県" target="_blank" class="activity-link">高山</a> → 🏮 <a href="https://maps.google.com/maps?q=高山老街+岐阜県" target="_blank" class="activity-link">高山老街</a> → 🌅 <a href="https://maps.google.com/maps?q=宮川朝市+高山" target="_blank" class="activity-link">宮川朝市</a> → 🏛️ <a href="https://maps.google.com/maps?q=高山陣屋+岐阜県" target="_blank" class="activity-link">高山陣屋</a>
                 </div>
                 <div class="day-hotel">🏨 <a href="https://maps.google.com/maps?q=Chisun+Grand+Takayama" target="_blank" class="hotel-link">Chisun Grand Takayama</a></div>
+                <div class="day-food">🍽️ 推薦美食：車站便當 → <a href="https://maps.google.com/maps?q=中華そば+麺屋しらかわ+高山" target="_blank" class="food-link">麵屋白川</a> (高山拉麵) → <a href="https://maps.google.com/maps?q=みたらし団子+高山" target="_blank" class="food-link">老街醬油糰子</a> → <a href="https://maps.google.com/maps?q=飛騨牛+丸明+高山" target="_blank" class="food-link">丸明 飛騨牛</a></div>
+                <div class="day-route">
+                    <a href="https://www.google.com/maps/dir/名古屋駅/高山駅+岐阜県/高山老街+岐阜県/Chisun+Grand+Takayama" target="_blank" class="route-btn">🗺️ 查看今日路線</a>
+                </div>
             </div>
 
             <div class="day-item">
@@ -715,10 +852,14 @@
                     <div class="day-city">高山</div>
                 </div>
                 <div class="day-activities">
-                    🏔️ <a href="https://maps.google.com/maps?q=上高地+長野県" target="_blank" class="activity-link">上高地</a>一日遊：<a href="https://maps.google.com/maps?q=高山駅+岐阜県" target="_blank" class="activity-link">高山</a>→<a href="https://maps.google.com/maps?q=平湯溫泉+岐阜県" target="_blank" class="activity-link">平湯溫泉</a>→<a href="https://maps.google.com/maps?q=上高地+長野県" target="_blank" class="activity-link">上高地</a>→<a href="https://maps.google.com/maps?q=河童橋+上高地" target="_blank" class="activity-link">河童橋</a>→<a href="https://maps.google.com/maps?q=明神池+上高地" target="_blank" class="activity-link">明神池</a>→返回高山 <br>
+                    🏔️ <a href="https://maps.google.com/maps?q=上高地+長野県" target="_blank" class="activity-link">上高地</a>一日遊：<a href="https://maps.google.com/maps?q=高山駅+岐阜県" target="_blank" class="activity-link">高山</a>→<a href="https://maps.google.com/maps?q=平湯溫泉+岐阜県" target="_blank" class="activity-link">平湯溫泉</a>→<a href="https://maps.google.com/maps?q=上高地+長野県" target="_blank" class="activity-link">上高地</a>→<a href="https://maps.google.com/maps?q=河童橋+上高地" target="_blank" class="activity-link">河童橋</a>→<a href="https://maps.google.com/maps?q=明神池+上高地" target="_blank" class="activity-link">明神池</a>→返回高山<br>
                     🚌 昇龍道巴士周遊券 + 平湯~上高地巴士往復券
                 </div>
                 <div class="day-hotel">🏨 <a href="https://maps.google.com/maps?q=Chisun+Grand+Takayama" target="_blank" class="hotel-link">Chisun Grand Takayama</a></div>
+                <div class="day-food">🍽️ 推薦美食：飯店早餐 → <a href="https://maps.google.com/maps?q=二四三屋+高山" target="_blank" class="food-link">二四三屋</a> (飛騨牛包子便當) → 上高地山莊料理 → <a href="https://maps.google.com/maps?q=舩坂酒造店+高山" target="_blank" class="food-link">舩坂酒造店</a> (日本酒)</div>
+                <div class="day-route">
+                    <a href="https://www.google.com/maps/dir/Chisun+Grand+Takayama/高山駅+岐阜県/平湯溫泉+岐阜県/上高地+長野県/河童橋+上高地/明神池+上高地/Chisun+Grand+Takayama" target="_blank" class="route-btn">🗺️ 查看今日路線</a>
+                </div>
             </div>
 
             <div class="day-item">
@@ -727,9 +868,13 @@
                     <div class="day-city">金澤</div>
                 </div>
                 <div class="day-activities">
-                    🏘️ <a href="https://maps.google.com/maps?q=白川合掌村+岐阜県" target="_blank" class="activity-link">白川合掌村</a> → 🚄 移動至<a href="https://maps.google.com/maps?q=金澤駅+石川県" target="_blank" class="activity-link">金澤</a> → 🌸 金澤市區
+                    🏘️ <a href="https://maps.google.com/maps?q=白川合掌村+岐阜県" target="_blank" class="activity-link">白川合掌村</a> → 🚄 移動至<a href="https://maps.google.com/maps?q=金澤駅+石川県" target="_blank" class="activity-link">金澤</a> → 🌸 金澤市區探索
                 </div>
                 <div class="day-hotel">🏨 <a href="https://maps.google.com/maps?q=HOTEL+TORIFITO+KANAZAWA" target="_blank" class="hotel-link">HOTEL TORIFITO KANAZAWA</a></div>
+                <div class="day-food">🍽️ 推薦美食：<a href="https://maps.google.com/maps?q=喫茶去+かつて+高山" target="_blank" class="food-link">喫茶去 快手</a> (早餐) → 白川合掌村鄉土料理 → <a href="https://maps.google.com/maps?q=近江町市場+金沢市" target="_blank" class="food-link">近江町市場</a> (新鮮海鮮丼)</div>
+                <div class="day-route">
+                    <a href="https://www.google.com/maps/dir/Chisun+Grand+Takayama/白川合掌村+岐阜県/金澤駅+石川県/HOTEL+TORIFITO+KANAZAWA" target="_blank" class="route-btn">🗺️ 查看今日路線</a>
+                </div>
             </div>
 
             <div class="day-item">
@@ -741,6 +886,10 @@
                     🏯 金澤一日遊：<a href="https://maps.google.com/maps?q=兼六園+金沢市" target="_blank" class="activity-link">兼六園</a> → <a href="https://maps.google.com/maps?q=金澤城+石川県" target="_blank" class="activity-link">金澤城</a> → <a href="https://maps.google.com/maps?q=東茶屋街+金沢市" target="_blank" class="activity-link">東茶屋街</a> → <a href="https://maps.google.com/maps?q=近江町市場+金沢市" target="_blank" class="activity-link">近江町市場</a>
                 </div>
                 <div class="day-hotel">🏨 <a href="https://maps.google.com/maps?q=HOTEL+TORIFITO+KANAZAWA" target="_blank" class="hotel-link">HOTEL TORIFITO KANAZAWA</a></div>
+                <div class="day-food">🍽️ 推薦美食：飯店早餐 → <a href="https://maps.google.com/maps?q=治部煮+金沢" target="_blank" class="food-link">治部煮專門店</a> (午餐) → <a href="https://maps.google.com/maps?q=金箔ソフトクリーム+金沢" target="_blank" class="food-link">金箔霜淇淋</a> → <a href="https://maps.google.com/maps?q=めおと寿司+金沢" target="_blank" class="food-link">夫婦壽司</a></div>
+                <div class="day-route">
+                    <a href="https://www.google.com/maps/dir/HOTEL+TORIFITO+KANAZAWA/兼六園+金沢市/金澤城+石川県/東茶屋街+金沢市/近江町市場+金沢市/HOTEL+TORIFITO+KANAZAWA" target="_blank" class="route-btn">🗺️ 查看今日路線</a>
+                </div>
             </div>
 
             <div class="day-item">
@@ -749,9 +898,13 @@
                     <div class="day-city">金澤</div>
                 </div>
                 <div class="day-activities">
-                    🚂 <a href="https://maps.google.com/maps?q=高岡駅+富山県" target="_blank" class="activity-link">高岡</a>一日遊：<a href="https://maps.google.com/maps?q=哆啦A夢散步道+高岡" target="_blank" class="activity-link">哆啦A夢散步道</a> → <a href="https://maps.google.com/maps?q=萬葉線+高岡" target="_blank" class="activity-link">哆啦A夢電車</a> → <a href="https://maps.google.com/maps?q=藤子F不二雄故里美術館+高岡" target="_blank" class="activity-link">藤子・F・不二雄故里美術館</a> → <a href="https://maps.google.com/maps?q=高岡大佛+富山県" target="_blank" class="activity-link">高岡大佛</a> → <a href="https://maps.google.com/maps?q=雨晴海岸+富山県" target="_blank" class="activity-link">雨晴海岸</a>
+                    🚂 <a href="https://maps.google.com/maps?q=高岡駅+富山県" target="_blank" class="activity-link">高岡</a>一日遊：<a href="https://maps.google.com/maps?q=哆啦A夢散步道+高岡" target="_blank" class="activity-link">哆啦A夢散步道</a> → <a href="https://maps.google.com/maps?q=萬葉線+高岡" target="_blank" class="activity-link">哆啦A夢電車</a> → <a href="https://maps.google.com/maps?q=高岡大佛+富山県" target="_blank" class="activity-link">高岡大佛</a> → <a href="https://maps.google.com/maps?q=雨晴海岸+富山県" target="_blank" class="activity-link">雨晴海岸</a>
                 </div>
                 <div class="day-hotel">🏨 <a href="https://maps.google.com/maps?q=HOTEL+TORIFITO+KANAZAWA" target="_blank" class="hotel-link">HOTEL TORIFITO KANAZAWA</a></div>
+                <div class="day-food">🍽️ 推薦美食：<a href="https://maps.google.com/maps?q=森八+金沢" target="_blank" class="food-link">森八本店</a> (和菓子) → 高岡車站便當 → 雨晴海岸海鮮料理</div>
+                <div class="day-route">
+                    <a href="https://www.google.com/maps/dir/HOTEL+TORIFITO+KANAZAWA/高岡駅+富山県/哆啦A夢散步道+高岡/高岡大佛+富山県/雨晴海岸+富山県/HOTEL+TORIFITO+KANAZAWA" target="_blank" class="route-btn">🗺️ 查看今日路線</a>
+                </div>
             </div>
 
             <div class="day-item">
@@ -763,6 +916,10 @@
                     🚄 移動至<a href="https://maps.google.com/maps?q=富山駅" target="_blank" class="activity-link">富山</a> → 🏨 富山市區探索
                 </div>
                 <div class="day-hotel">🏨 <a href="https://maps.google.com/maps?q=Onyado+Nono+Toyama" target="_blank" class="hotel-link">Onyado Nono Toyama Natural Hot Spring</a></div>
+                <div class="day-food">🍽️ 推薦美食：飯店早餐 → <a href="https://maps.google.com/maps?q=白えび亭+富山駅" target="_blank" class="food-link">白蝦亭</a> (白蝦天婦羅丼) → <a href="https://maps.google.com/maps?q=ますのすし本舗源+富山" target="_blank" class="food-link">鱒壽司本舖 源</a> → 溫泉飯店會席料理</div>
+                <div class="day-route">
+                    <a href="https://www.google.com/maps/dir/HOTEL+TORIFITO+KANAZAWA/富山駅/Onyado+Nono+Toyama" target="_blank" class="route-btn">🗺️ 查看今日路線</a>
+                </div>
             </div>
 
             <div class="day-item">
@@ -774,6 +931,10 @@
                     🏰 <a href="https://maps.google.com/maps?q=松本城+長野県" target="_blank" class="activity-link">松本</a>一日遊：<a href="https://maps.google.com/maps?q=松本城+長野県" target="_blank" class="activity-link">松本城</a> → <a href="https://maps.google.com/maps?q=松本市街+長野県" target="_blank" class="activity-link">松本市區</a> → 返回富山
                 </div>
                 <div class="day-hotel">🏨 <a href="https://maps.google.com/maps?q=Toyoko+Inn+Toyama" target="_blank" class="hotel-link">Toyoko Inn Toyama-eki Shinkansen-guchi No.2</a></div>
+                <div class="day-food">🍽️ 推薦美食：溫泉飯店早餐 → <a href="https://maps.google.com/maps?q=富山ブラック+麺家いろは" target="_blank" class="food-link">麵家 彩葉</a> (富山黑拉麵) → 松本城下町信州蕎麥麵 → <a href="https://maps.google.com/maps?q=氷見うどん+富山" target="_blank" class="food-link">冰見烏龍麵</a></div>
+                <div class="day-route">
+                    <a href="https://www.google.com/maps/dir/Onyado+Nono+Toyama/松本城+長野県/松本市街+長野県/Toyoko+Inn+Toyama" target="_blank" class="route-btn">🗺️ 查看今日路線</a>
+                </div>
             </div>
 
             <div class="day-item">
@@ -785,6 +946,10 @@
                     🗻 <a href="https://maps.google.com/maps?q=立山黑部+富山県" target="_blank" class="activity-link">立山黑部</a>一日遊：<a href="https://maps.google.com/maps?q=立山駅+富山県" target="_blank" class="activity-link">立山</a>→<a href="https://maps.google.com/maps?q=黑部大壩+富山県" target="_blank" class="activity-link">黑部大壩</a>→<a href="https://maps.google.com/maps?q=立山駅+富山県" target="_blank" class="activity-link">立山</a> → 返回<a href="https://maps.google.com/maps?q=名古屋駅" target="_blank" class="activity-link">名古屋</a>
                 </div>
                 <div class="day-hotel">🏨 <a href="https://maps.google.com/maps?q=Comfort+Hotel+Nagoya+Meiekiminami" target="_blank" class="hotel-link">Comfort Hotel Nagoya Meiekiminami</a></div>
+                <div class="day-food">🍽️ 推薦美食：飯店早餐 → <a href="https://maps.google.com/maps?q=かまぼこ+河内屋+富山" target="_blank" class="food-link">河內屋</a> (昆布魚板便當) → 立山山區料理 → <a href="https://maps.google.com/maps?q=味仙+今池本店+名古屋" target="_blank" class="food-link">味仙</a> (台灣拉麵)</div>
+                <div class="day-route">
+                    <a href="https://www.google.com/maps/dir/Toyoko+Inn+Toyama/立山駅+富山県/黑部大壩+富山県/名古屋駅/Comfort+Hotel+Nagoya+Meiekiminami" target="_blank" class="route-btn">🗺️ 查看今日路線</a>
+                </div>
             </div>
 
             <div class="day-item">
@@ -796,6 +961,10 @@
                     🐟 <a href="https://maps.google.com/maps?q=名古屋港水族館" target="_blank" class="activity-link">名古屋港水族館</a> → 🚄 <a href="https://maps.google.com/maps?q=磁浮鐵道館+名古屋" target="_blank" class="activity-link">磁浮鐵道館</a> → 🗼 <a href="https://maps.google.com/maps?q=中部電力MIRAI TOWER+名古屋" target="_blank" class="activity-link">中部電力MIRAI TOWER</a> → 🌟 <a href="https://maps.google.com/maps?q=綠洲21+名古屋" target="_blank" class="activity-link">綠洲21</a>
                 </div>
                 <div class="day-hotel">🏨 <a href="https://maps.google.com/maps?q=Comfort+Hotel+Nagoya+Meiekiminami" target="_blank" class="hotel-link">Comfort Hotel Nagoya Meiekiminami</a></div>
+                <div class="day-food">🍽️ 推薦美食：<a href="https://maps.google.com/maps?q=コメダ珈琲店+名古屋" target="_blank" class="food-link">Komeda Coffee</a> (早餐) → 水族館餐廳 → <a href="https://maps.google.com/maps?q=山本屋総本家+名古屋" target="_blank" class="food-link">山本屋総本家</a> (味噌烏龍麵) → 綠洲21美食街</div>
+                <div class="day-route">
+                    <a href="https://www.google.com/maps/dir/Comfort+Hotel+Nagoya+Meiekiminami/名古屋港水族館/磁浮鐵道館+名古屋/中部電力MIRAI+TOWER+名古屋/綠洲21+名古屋/Comfort+Hotel+Nagoya+Meiekiminami" target="_blank" class="route-btn">🗺️ 查看今日路線</a>
+                </div>
             </div>
 
             <div class="day-item">
@@ -807,10 +976,22 @@
                     🌿 <a href="https://maps.google.com/maps?q=白鳥庭園+名古屋" target="_blank" class="activity-link">白鳥庭園</a> → ⛩️ <a href="https://maps.google.com/maps?q=熱田神宮+名古屋" target="_blank" class="activity-link">熱田神宮</a> → 🍱 <a href="https://maps.google.com/maps?q=蓬萊軒本店+名古屋" target="_blank" class="activity-link">蓬萊軒鰻魚飯三吃</a> → ✈️ <a href="https://maps.google.com/maps?q=中部國際機場+愛知県" target="_blank" class="activity-link">中部國際機場</a> (16:35→18:50)
                 </div>
                 <div class="day-hotel">🏠 回到溫暖的家</div>
+                <div class="day-food">🍽️ 推薦美食：飯店早餐 → 白鳥庭園茶屋 → <a href="https://maps.google.com/maps?q=蓬萊軒本店+名古屋" target="_blank" class="food-link">蓬萊軒本店</a> (鰻魚飯三吃告別餐) → 機場伴手禮</div>
+                <div class="day-route">
+                    <a href="https://www.google.com/maps/dir/Comfort+Hotel+Nagoya+Meiekiminami/白鳥庭園+名古屋/熱田神宮+名古屋/蓬萊軒本店+名古屋/中部國際機場+愛知県" target="_blank" class="route-btn">🗺️ 查看今日路線</a>
+                </div>
             </div>
         </div>
 
         <div class="tips">
+            <h3>🍽️ 美食推薦精選</h3>
+            <ul>
+                <li><strong>名古屋特色</strong>：鰻魚飯三吃、台灣拉麵、味噌烏龍麵、手羽先炸雞翅</li>
+                <li><strong>高山特色</strong>：A5飛騨牛、高山拉麵、日本酒、醬油糰子</li>
+                <li><strong>金澤特色</strong>：加能蟹、甜蝦、治部煮、金箔霜淇淋</li>
+                <li><strong>富山特色</strong>：白蝦、鱒魚壽司、富山黑拉麵、昆布魚板</li>
+            </ul>
+
             <h3>🚄 交通路線最佳化建議</h3>
             <ul>
                 <li><strong>JR高山北陸地區周遊券</strong>：完美覆蓋名古屋→高山→金澤→富山→名古屋的路線</li>
@@ -838,7 +1019,7 @@
 
             <h3>🎫 重要票券整理</h3>
             <ul>
-                <li><strong>JR高山北陸地區周遊券</strong>：7/19-7/23 (5日券)</li>
+                <li><strong>JR高山北陸地區周遊券</strong>：7/20-7/27 使用</li>
                 <li><strong>昇龍道巴士周遊券</strong>：高山&平湯溫泉往返</li>
                 <li><strong>立山黑部阿爾卑斯路線票</strong>：7/27當日使用</li>
                 <li><strong>名古屋地鐵一日券</strong>：市區觀光日使用</li>
